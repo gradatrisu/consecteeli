@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed Interface Example</title>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#consultar" class="tab-link">Consultar</a></li>
+            <li><a href="#other-tab" class="tab-link">Other Tab</a></li>
+        </ul>
+    </nav>
+
+    <section id="consultar" class="tab-content">
+        <h2>Consultar</h2>
+        <p>This is the content for the Consultar tab.</p>
+    </section>
+
+    <section id="other-tab" class="tab-content">
+        <h2>Other Tab</h2>
+        <p>This is the content for the Other Tab.</p>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+
+                    tabContents.forEach(content => {
+                        if (content.id === targetId) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // Optionally, activate the first tab by default
+            if (tabs.length > 0) {
+                tabs[0].click();
+            }
+        });
+    </script>
+</body>
+</html>
