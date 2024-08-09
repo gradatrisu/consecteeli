@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with Azure example</title>
+    <script>
+        var socket = new WebSocket("ws://localhost:5000/chat");
+
+        socket.onopen = function() {
+            console.log("WebSocket connection established.");
+        };
+
+        socket.onmessage = function(event) {
+            var response = event.data;
+            console.log("Received: " + response);
+            // Handle displaying response on UI
+        };
+
+        function sendMessage(message) {
+            socket.send(message);
+        }
+    </script>
+</head>
+<body>
+    <h1>Chat with Azure example</h1>
+    <textarea id="message" placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage(document.getElementById('message').value)">Send</button>
+</body>
+</html>
